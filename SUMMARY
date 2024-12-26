@@ -1,0 +1,28 @@
+Hello everyone, this was mine and my team's attempt at using this model on the Oak-D Lite AI camera to automate a golf cart to provide it as a shuttle service on our university's campus, and following a specific drawn ready made path,
+with the use of an RPI4, Arduino MEGA2560, two seperate BLDC motors with their correspondant drivers/controllers,
+and a two TTL to RS485 converters to help commands over different serial channels/nodes for both motors used for steering and braking.
+
+The main demo.py script is used to run the lane detection model on an example image, so we simply borrowed the pipeline feature or camera feed from the MobileNet of Depthai-python library as well as the human detection model.
+We also used the provided pre-trained weights and tested them on our campus ground markings that are actually marked as path for scooters and golf carts and bicycles, and so model worked wonderfully on these ground markings,
+and based on the limitation of the RPI4 we set the specific speed of opertation for braking and steering motor. In our case, a resulting inference time of 2000 - 2500 ms meant that we would allow the motor to turn the steering column at
+the slowest pace possible since it is being updated every 2 seconds using the v1.3 script. This script involves image processing techniques borrowed from UTILS library to perform image process techniques to:
+
+A) Find the center line of the image
+B) Find the center line of the area that is drawn between the two lanes
+C) Calculate the difference between these two lines (Offset)
+D) Depending on the offset value the command sent from the raspberry to the arduino is either CW or CCW or STRAIGHT/STALL if the offset is > 20 or <-20 or == 20.
+
+The script also uses the MobileNet human detection model borrowed from the depthai-python library for the purpose of sending braking commands:
+
+A) Find object and specify confidence score
+B) Should the confidence score be above a certain thershold -> send BRAKE command to the arduino and the arduino communicates over with the TTL model connected to the motor attached to the braking system.
+C) repeat operation
+
+(The speed of the golf cart is set manually from the driver by a small analog potentiometer control knob attached just by the key ignition of the golf cart)
+
+Future work involve using a digital potentiometer to set the speed automatically when the path is clear and the self driving mode is enabled from the keyswitch after detecting three consecutive signals that lanes are detected and path IS clear,
+localization through a U-Blox GPS model to remember the coordinates at every building the cart stops at and allows for seamless transportation, better computer architechture for faster inference time (RPI5 or NVIDIA Jetson Orion) or better yet
+use a lighter lane detection model. I hope anyone is able to benefit something from this, should you have any questions or doubts please do not hesitate to email me at yusefali.2011@gmail.com
+
+Many thanks to my team-mates Moosa and Rhea as well as Mr. Ali Reza and Eng. Medhat for their tremendous efforts and help for making this happen :) 
+
