@@ -87,7 +87,11 @@ class SegmentationMetric(object):
         # acc = (TP + TN) / (TP + TN + FP + TN)
         acc = np.diag(self.confusionMatrix).sum() /  self.confusionMatrix.sum()
         return acc
+<<<<<<< HEAD
         
+=======
+
+>>>>>>> 45fca39 (Initial commit: Fine-tuned YOLOPv2 model)
     def lineAccuracy(self):
         Acc = np.diag(self.confusionMatrix) / (self.confusionMatrix.sum(axis=1) + 1e-12)
         return Acc[1]
@@ -112,7 +116,11 @@ class SegmentationMetric(object):
         IoU[np.isnan(IoU)] = 0
         mIoU = np.nanmean(IoU)
         return mIoU
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> 45fca39 (Initial commit: Fine-tuned YOLOPv2 model)
     def IntersectionOverUnion(self):
         intersection = np.diag(self.confusionMatrix)
         union = np.sum(self.confusionMatrix, axis=1) + np.sum(self.confusionMatrix, axis=0) - np.diag(self.confusionMatrix)
@@ -166,12 +174,20 @@ class AverageMeter(object):
 def _make_grid(nx=20, ny=20):
         yv, xv = torch.meshgrid([torch.arange(ny), torch.arange(nx)])
         return torch.stack((xv, yv), 2).view((1, 1, ny, nx, 2)).float()
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> 45fca39 (Initial commit: Fine-tuned YOLOPv2 model)
 def split_for_trace_model(pred = None, anchor_grid = None):
     z = []
     st = [8,16,32]
     for i in range(3):
+<<<<<<< HEAD
         bs, _, ny, nx = pred[i].shape  
+=======
+        bs, _, ny, nx = pred[i].shape
+>>>>>>> 45fca39 (Initial commit: Fine-tuned YOLOPv2 model)
         pred[i] = pred[i].view(bs, 3, 85, ny, nx).permute(0, 1, 3, 4, 2).contiguous()
         y = pred[i].sigmoid()
         gr = _make_grid(nx, ny).to(pred[i].device)
@@ -193,14 +209,22 @@ def show_seg_result(img, result, palette=None,is_demo=False):
     assert palette.shape[0] == 3 # len(classes)
     assert palette.shape[1] == 3
     assert len(palette.shape) == 2
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> 45fca39 (Initial commit: Fine-tuned YOLOPv2 model)
     if not is_demo:
         color_seg = np.zeros((result.shape[0], result.shape[1], 3), dtype=np.uint8)
         for label, color in enumerate(palette):
             color_seg[result == label, :] = color
     else:
         color_area = np.zeros((result[0].shape[0], result[0].shape[1], 3), dtype=np.uint8)
+<<<<<<< HEAD
         
+=======
+
+>>>>>>> 45fca39 (Initial commit: Fine-tuned YOLOPv2 model)
         color_area[result[0] == 1] = [0, 255, 0]
         color_area[result[1] ==1] = [255, 0, 0]
         color_seg = color_area
@@ -213,7 +237,11 @@ def show_seg_result(img, result, palette=None,is_demo=False):
     # img = img * 0.5 + color_seg * 0.5
     #img = img.astype(np.uint8)
     #img = cv2.resize(img, (1280,720), interpolation=cv2.INTER_LINEAR)
+<<<<<<< HEAD
     return 
+=======
+    return
+>>>>>>> 45fca39 (Initial commit: Fine-tuned YOLOPv2 model)
 
 
 def increment_path(path, exist_ok=True, sep=''):
@@ -498,12 +526,20 @@ def letterbox(img, new_shape=(640, 640), color=(114, 114, 114), auto=True, scale
 
     if shape[::-1] != new_unpad:  # resize
         img = cv2.resize(img, new_unpad, interpolation=cv2.INTER_LINEAR)
+<<<<<<< HEAD
      
+=======
+
+>>>>>>> 45fca39 (Initial commit: Fine-tuned YOLOPv2 model)
     top, bottom = int(round(dh - 0.1)), int(round(dh + 0.1))
     left, right = int(round(dw - 0.1)), int(round(dw + 0.1))
 
     img = cv2.copyMakeBorder(img, top, bottom, left, right, cv2.BORDER_CONSTANT, value=color)  # add border
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> 45fca39 (Initial commit: Fine-tuned YOLOPv2 model)
     return img, ratio, (dw, dh)
 
 def driving_area_mask(seg = None):
@@ -518,4 +554,8 @@ def lane_line_mask(ll = None):
     ll_seg_mask = torch.nn.functional.interpolate(ll_predict, scale_factor=2, mode='bilinear')
     ll_seg_mask = torch.round(ll_seg_mask).squeeze(1)
     ll_seg_mask = ll_seg_mask.int().squeeze().cpu().numpy()
+<<<<<<< HEAD
     return ll_seg_mask
+=======
+    return ll_seg_mask
+>>>>>>> 45fca39 (Initial commit: Fine-tuned YOLOPv2 model)

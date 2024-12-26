@@ -1,0 +1,43 @@
+Arduino
+
+To do
+- Implement logic: If three concective similar messages, then do (move/stop steering)
+
+Done
+
+
+Raspberry Pi
+
+To do
+- Figure out plan B
+- Confiugure the new compute unit (accelerator)
+- Integerate the human detection with lane detection (new detect function with human detection part)
+- Figure out a more autonomus way to start the self driving mode on the raspberry pi
+
+Done
+
+- Show two center points on the image
+
+
+Git
+
+To do
+
+- Initialize repo
+
+Done
+
+
+
+
+Limitations
+- Wide lens camera
+- Higher computationally capable compute unit (raspberry pi) - Before the accelerator, the inference time was 2.4s on 15FPS video with 320x320 pixel images
+
+
+
+
+Functionalities
+- Raspberry pi is the compute unit and arduino is the hardware control unit
+- Message error proofing: The arduino waits for 3 consecutive similar messages before passing instructions to the motors
+- The raspberry has a safety offset of 20 pixels before changing the steering direction 

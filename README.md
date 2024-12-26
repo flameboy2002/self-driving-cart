@@ -170,3 +170,7 @@ If you find YOLOPv2 is useful in your research or applications, please consider 
   year={2022}
 }
 ``` -->
+<<<<<<< HEAD
+=======
+# self-driving-cart
+>>>>>>> 45fca39 (Initial commit: Fine-tuned YOLOPv2 model)
